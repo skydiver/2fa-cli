@@ -1,6 +1,6 @@
 const program = require('commander');
 const helpers = require('../lib/helpers');
-const token = require('../commands/token');
+const tokens = require('../commands/tokens');
 const pkg = require('../package.json');
 
 program
@@ -8,7 +8,7 @@ program
 
 program
   .arguments('<account>')
-  .action((account) => token
+  .action((account) => tokens
     .generate(account, true)
     .catch(helpers.handleError));
 
