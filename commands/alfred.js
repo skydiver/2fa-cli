@@ -7,12 +7,7 @@ const pkg = require('../package.json');
 
 const packageName = helpers.extractName(pkg.name);
 
-const search = async (query) => {
-  const settings = new Settings(packageName);
-  const accounts = await settings.readParameter('accounts');
-  const searchObject = Object.keys(accounts).map(function(key) {
-    return { account: key };
-  });
+const fuzzy = (query, rows) => {
   const options = {
     shouldSort: true,
     threshold: 0.6,
@@ -22,8 +17,19 @@ const search = async (query) => {
     minMatchCharLength: 1,
     keys: ['account']
   };
-  const fuse = new Fuse(searchObject, options);
-  const result = fuse.search(query);
+  const fuse = new Fuse(rows, options);
+  return fuse.search(query);
+};
+
+const search = async (query) => {
+  const settings = new Settings(packageName);
+  const accounts = await settings.readParameter('accounts');
+  let result = Object.keys(accounts).map(function(key) {
+    return { account: key };
+  });
+  if (query.trim() !== '') {
+    result = fuzzy(query, result);
+  }
   const output = [];
   result.forEach(acc => {
     output.push({
@@ -31,7 +37,7 @@ const search = async (query) => {
       body: acc.account,
       arg: acc.account,
       icon: {
-        path: `./icons/${acc.account}.png`
+        path: `./icons/${acc.account.toLowerCase()}.png`
       }
     });
   });
