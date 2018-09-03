@@ -1,15 +1,16 @@
 const program = require('commander');
 const helpers = require('../lib/helpers');
-const token = require('../commands/token');
+const token = require('../commands/tokens');
 const pkg = require('../package.json');
 
 program
   .version(pkg.version);
 
 program
-  .arguments('<account>')
-  .action((account) => token
-    .generate(account)
+  .command('browse')
+  .description('Browse your accounts')
+  .action(() => token
+    .browse()
     .catch(helpers.handleError));
 
 program
