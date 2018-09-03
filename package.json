@@ -6,7 +6,8 @@
     "2fa": "./bin/2fa.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "alfy-init",
+    "preuninstall": "alfy-cleanup"
   },
   "author": "Martín M.",
   "license": "MIT",
