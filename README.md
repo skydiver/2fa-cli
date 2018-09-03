@@ -1,3 +1,3 @@
 # 2FA CLI
 
-> A command line client for Uptime Robot
+> Generate 2FA tokens from command line
