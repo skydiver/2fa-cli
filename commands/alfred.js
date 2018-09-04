@@ -1,5 +1,4 @@
 const Fuse = require('fuse.js');
-const alfy = require('alfy');
 const helpers = require('../lib/helpers');
 const Settings = require('../lib/settings');
 const pkg = require('../package.json');
@@ -22,6 +21,7 @@ const fuzzy = (query, rows) => {
 };
 
 const search = async (query) => {
+  const alfy = require('alfy');
   const settings = new Settings(packageName);
   const accounts = await settings.readParameter('accounts');
   let result = Object.keys(accounts).map(function(key) {
