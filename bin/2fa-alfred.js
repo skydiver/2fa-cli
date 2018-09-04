@@ -7,8 +7,22 @@ program
   .version(pkg.version);
 
 program
+  .command('install')
+  .description('Install Alfred Workflow')
+  .action(() => alfred
+    .install()
+    .catch(helpers.handleError));
+
+program
+  .command('uninstall')
+  .description('Uninstall Alfred Workflow')
+  .action(() => alfred
+    .uninstall()
+    .catch(helpers.handleError));
+
+program
   .command('search <query>')
-  .description('Search accounts and return in Alfred Workflow format')
+  .description('Used by Alfred Workflow')
   .action((query) => alfred
     .search(query)
     .catch(helpers.handleError));

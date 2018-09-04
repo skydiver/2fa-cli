@@ -27,6 +27,7 @@
     "configstore": "^3.1.1",
     "fuse.js": "^3.2.1",
     "inquirer": "^4.0.1",
+    "node-cmd": "^3.0.0",
     "otplib": "^10.0.1"
   }
 }

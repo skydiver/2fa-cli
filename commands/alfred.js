@@ -1,4 +1,5 @@
 const Fuse = require('fuse.js');
+const cmd = require('node-cmd');
 const helpers = require('../lib/helpers');
 const Settings = require('../lib/settings');
 const pkg = require('../package.json');
@@ -45,6 +46,14 @@ const search = async (query) => {
 };
 
 
-const configure = { search };
+const install = async () => {
+  cmd.run('./node_modules/.bin/alfy-init');
+  helpers.stringSuccess('Alfred Workflow was successfully installed.');
+};
 
-module.exports = configure;
+const uninstall = async () => {
+  cmd.run('./node_modules/.bin/alfy-cleanup');
+  helpers.stringSuccess('Alfred Workflow was successfully uninstalled.');
+};
+
+module.exports = { search, install, uninstall };
