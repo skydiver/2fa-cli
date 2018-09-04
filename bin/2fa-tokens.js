@@ -1,6 +1,6 @@
 const program = require('commander');
 const helpers = require('../lib/helpers');
-const token = require('../commands/tokens');
+const tokens = require('../commands/tokens');
 const pkg = require('../package.json');
 
 program
@@ -9,7 +9,7 @@ program
 program
   .command('browse')
   .description('Browse your accounts')
-  .action(() => token
+  .action(() => tokens
     .browse()
     .catch(helpers.handleError));
 

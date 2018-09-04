@@ -2,13 +2,9 @@ const inquirer = require('inquirer');
 const helpers = require('../lib/helpers');
 const { table } = require('../lib/table');
 const Settings = require('../lib/settings');
-const pkg = require('../package.json');
-
-
-const packageName = helpers.extractName(pkg.name);
 
 const add = async () => {
-  const settings = new Settings(packageName);
+  const settings = new Settings(helpers.packageName);
   const accounts = await settings.readParameter('accounts') || {};
   const answers = await inquirer.prompt([
     {
@@ -32,7 +28,7 @@ const add = async () => {
 };
 
 const remove = async () => {
-  const settings = new Settings(packageName);
+  const settings = new Settings(helpers.packageName);
   const accounts = await settings.readParameter('accounts') || {};
   if (Object.keys(accounts).length === 0) {
     throw new Error('There is no stored accounts.');
@@ -48,13 +44,10 @@ const remove = async () => {
 };
 
 const list = async () => {
-  const settings = new Settings(packageName);
+  const settings = new Settings(helpers.packageName);
   const accounts = await settings.readParameter('accounts') || {};
   const tbl = table(['Accounts'], Object.keys(accounts));
   console.log(tbl.toString());
 };
 
-
-const configure = { add, remove, list };
-
-module.exports = configure;
+module.exports = { add, remove, list };

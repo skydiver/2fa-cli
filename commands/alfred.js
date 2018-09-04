@@ -2,10 +2,6 @@ const Fuse = require('fuse.js');
 const cmd = require('node-cmd');
 const helpers = require('../lib/helpers');
 const Settings = require('../lib/settings');
-const pkg = require('../package.json');
-
-
-const packageName = helpers.extractName(pkg.name);
 
 const fuzzy = (query, rows) => {
   const options = {
@@ -23,7 +19,7 @@ const fuzzy = (query, rows) => {
 
 const search = async (query) => {
   const alfy = require('alfy');
-  const settings = new Settings(packageName);
+  const settings = new Settings(helpers.packageName);
   const accounts = await settings.readParameter('accounts');
   let result = Object.keys(accounts).map(function(key) {
     return { account: key };
@@ -44,7 +40,6 @@ const search = async (query) => {
   });
   alfy.output(output);
 };
-
 
 const install = async () => {
   cmd.run('./node_modules/.bin/alfy-init');

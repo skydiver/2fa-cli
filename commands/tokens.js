@@ -1,13 +1,8 @@
-const inquirer = require('inquirer');
 const otplib = require('otplib');
 const helpers = require('../lib/helpers');
 const { table } = require('../lib/table');
 const Settings = require('../lib/settings');
 const { selector } = require('../lib/accounts');
-const pkg = require('../package.json');
-
-
-const packageName = helpers.extractName(pkg.name);
 
 const browse = async () => {
   const account = await selector();
@@ -17,8 +12,8 @@ const browse = async () => {
   console.log(tbl.toString());
 };
 
-const generate = async (account, raw) => {
-  const settings = new Settings(packageName);
+const generate = async (account) => {
+  const settings = new Settings(helpers.packageName);
   const acc = await settings.readParameter(`accounts.${account}`);
   if (!acc) {
     helpers.stringWarning(`Warning: account ${account} doesn't exists.`);
@@ -27,6 +22,5 @@ const generate = async (account, raw) => {
   const token = otplib.authenticator.generate(acc.secret);
   console.log(token);
 };
-
 
 module.exports = { browse, generate };
