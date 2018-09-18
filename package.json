@@ -1,6 +1,6 @@
 {
   "name": "2fa-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generate 2FA tokens from command line",
   "bin": {
     "2fa": "./bin/2fa.js"

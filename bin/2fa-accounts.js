@@ -8,21 +8,21 @@ program
 
 program
   .command('add')
-  .description('Add your Uptime Robot API key')
+  .description('Add your 2FA account secret')
   .action(() => accounts
     .add()
     .catch(helpers.handleError));
 
 program
   .command('remove')
-  .description('Clear your Uptime Robot API key')
+  .description('Remove 2FA account')
   .action(() => accounts
     .remove()
     .catch(helpers.handleError));
 
 program
   .command('list')
-  .description('View your stored Uptime Robot API key')
+  .description('List your accounts')
   .action(() => accounts
     .list()
     .catch(helpers.handleError));
